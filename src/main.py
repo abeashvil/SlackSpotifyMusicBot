@@ -1,4 +1,5 @@
 from calendar import c
+from logging.handlers import SYSLOG_UDP_PORT
 import spotipy
 import os
 import time
@@ -45,6 +46,9 @@ def send_new_song(channelid):
 
         todays_songs.add(Message(most_recent_song_link, ts))
 
+        
+
+
     
 def setup():
     channel = dict()
@@ -65,16 +69,18 @@ def setup():
 
     return channelId
 
-def check_best_song():
-    for song in todays_songs:
-        
+def check_best_song(id):
+    curr = todays_songs.pop()
+    # for song in todays_songs:
+    #     if slack_client.reactions_get(channel= id, ts = song.getTimestamp()):
 
 def main():
     id = setup()
 
     send_new_song(id)
 
-    
+
+    print(slack_client.reactions_get(channel = channelid, timestamp = ts)['message']['reactions'][0]['count'])
 
 
 
