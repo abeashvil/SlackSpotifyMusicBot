@@ -7,8 +7,11 @@ from dotenv import load_dotenv
 from slack_sdk import WebClient
 from spotipy.oauth2 import SpotifyClientCredentials
 
+from Message import Message
+
 #code for setting up the bots with the tokens and also the scopes needed for reading recently played songs along with making a playlist
 #also sets up the slack bot client using the slack bot token found in my .env However you cant see my .env because I am not charlie
+
 load_dotenv() 
 scope = "user-read-recently-played"
 scope2 = "playlist-modify-public";
@@ -18,8 +21,7 @@ slack_client = WebClient(SLACK_BOT_TOKEN)
 #my global spotify variable. Using this to ONLY to get my recently played songs. Scope doesnt allow for anything else.
 sp = spotipy.Spotify(auth_manager=SpotifyOAuth(scope=scope))
 
-most_recent_song = sp.current_user_recently_played(1)
-
+todays_songs = set()
 
 def send_new_song(channelid):
 
@@ -40,6 +42,9 @@ def send_new_song(channelid):
         data_mes = message.data
         ts = data_mes['messages'][0]['ts']
         slack_client.reactions_add(channel=channelid, name = 'heart', timestamp=ts)
+
+        todays_songs.add(Message(most_recent_song_link, ts))
+
     
 def setup():
     channel = dict()
@@ -60,11 +65,17 @@ def setup():
 
     return channelId
 
+def check_best_song():
+    for song in todays_songs:
+        
 
 def main():
     id = setup()
 
     send_new_song(id)
+
+    
+
 
 
 if __name__ == "__main__":
