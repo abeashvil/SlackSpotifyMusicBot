@@ -19,9 +19,11 @@ def main():
         # creates a list of all the channels in the slack conversation
         channelList = bot.conversations_list()['channels']
 
+        print(channelList)
         #if the channel already exists, we need to set the channel variable to it and also have the bot join the channel
         for i in range(len(channelList)):
             if(channelList[i]["name"] == "imageoftheweek"):
+                
                 channel = channelList[i]
                 bot.conversations_join(channel = channel['id'])
 
