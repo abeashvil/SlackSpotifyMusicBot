@@ -100,11 +100,10 @@ def song_of_the_day():
             print("Todays best song is!")
             print(song.getText())
             i = 0
- 
+
 
 def main():
-    
-
+    song_of_the_day()
 
 
 if __name__ == "__main__":
