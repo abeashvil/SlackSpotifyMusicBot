@@ -22,8 +22,4 @@ To Note: This project is very much still a work in progress, and I would like to
   joins the pre-existing one. Next I created the send_new_song function, which fetches my most recently 
   listened to song, checks if its equal to the previously sent song, and sends it in the channel if they are   different. After this, I iterate through all the songs and check the amount of reactions under the song to   see which one is the best, and then I send that song at the end of the time period. 
 
-- What I learned during this project...
-
-  - This project was my first experience with any form of an API, so learning both was a bit confusing. I spent a lot of my time originally researching how to set up a bot for both slack and spotify. The setup  of the bots was the most difficult part for me. Next I spent time planning out how I would set up the bot to periodically send songs. I needed to fetch my most recent song, go through the data and find what I needed, find out which channel I would send that data too, and then send it. Overall, I think I learned a great deal about API's and how to use bots, and I feel fairly confident in tackling such things from now on. 
-
 I plan of implementing this bot soon on slack, but I would prefer that it works for all users spotify accounts rather than just mine before doing so. 
