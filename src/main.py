@@ -24,18 +24,27 @@ sp = spotipy.Spotify(auth_manager=SpotifyOAuth(scope=scope))
 
 todays_songs = set()
 
+"""
+sneds new song posts a new song into a channel given a channel ID
+
+@param string channelID     Id of the channel
+
+@return void
+"""
 def send_new_song(channelid):
 
     most_recent_song = sp.current_user_recently_played(1)
     most_recent_song_uri = most_recent_song['items'][0]['track']['uri']
     most_recent_song_link = most_recent_song['items'][0]['track']['external_urls']['spotify']
 
-    previous_song = slack_client.conversations_history(channel =channelid, limit= 1).data['messages'][0]['text'][1:-1]
+    previous_message = slack_client.conversations_history(channel =channelid, limit= 1).data['messages'][0]['text'][1:-1]
 
-    print(previous_song)
+    print(previous_message)
 
     
-    if most_recent_song_link != previous_song:       
+    if most_recent_song_link != previous_message and previous_message == '$help':       
+        print("The bot will display a song every hour, and then will vote on the best song by the end of the day! React to your favorite song in order to vote")
+    elif(most_recent_song != previous_message):
         slack_client.chat_postMessage(channel=channelid, text = most_recent_song_link)
      
         message = slack_client.conversations_history(channel =channelid, limit= 1)
@@ -87,8 +96,11 @@ def song_of_the_day():
         i +=1
 
         if(i >= 12):
-            check_best_song(id)
+            song = check_best_song(id)
+            print("Todays best song is!")
+            print(song.getText())
             i = 0
+ 
 
 def main():
     
