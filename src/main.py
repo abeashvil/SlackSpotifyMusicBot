@@ -25,7 +25,7 @@ sp = spotipy.Spotify(auth_manager=SpotifyOAuth(scope=scope))
 todays_songs = set()
 
 """
-sneds new song posts a new song into a channel given a channel ID
+sends new song posts a new song into a channel given a channel ID
 
 @param string channelID     Id of the channel
 
@@ -58,7 +58,11 @@ def send_new_song(channelid):
         print(todays_songs)
 
 
-    
+"""
+setup for both the channel creation
+
+@return channelId
+"""   
 def setup():
     channel = dict()
     try:
@@ -78,6 +82,11 @@ def setup():
 
     return channelId
 
+"""
+setup for both the channel creation
+
+@return channelId
+""" 
 def check_best_song(id):
     curr = 0
     currSong = Message()
@@ -87,6 +96,11 @@ def check_best_song(id):
     
     return currSong
 
+"""
+sends the best song over an interval of 24 hours. users can vote on their favorite song by reacting to it with a heart.
+
+@return void
+""" 
 def song_of_the_day():
     id = setup()
     i = 0
