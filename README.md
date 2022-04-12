@@ -7,7 +7,9 @@ To Note: This project is very much still a work in progress, and I would like to
   
   
   *Current Issues:
-      - Spotipy API authentication does not support single login authentication, rahter requires the use of a           token. To fix this, the spotify section of the code must be written in the Javascript equivalent               library, which does support single login authentification.
+  
+      Spotipy API authentication does not support single login authentication, rahter requires the use of a           token. To fix this, the spotify section of the code must be written in the Javascript equivalent               library, which does support single login authentification.
+      
       -Inefficient code, which can be fixed by having program run only at specified times, storing the results        in a database, and then checking the results after the day ends.
 
 How my code works: 
