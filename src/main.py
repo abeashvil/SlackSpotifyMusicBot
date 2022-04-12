@@ -38,9 +38,6 @@ def send_new_song(channelid):
     most_recent_song_link = most_recent_song['items'][0]['track']['external_urls']['spotify']
 
     previous_message = slack_client.conversations_history(channel =channelid, limit= 1).data['messages'][0]['text'][1:-1]
-
-    print(previous_message)
-
     
     if most_recent_song_link != previous_message and previous_message == '$help':       
         print("The bot will display a song every hour, and then will vote on the best song by the end of the day! React to your favorite song in order to vote")
