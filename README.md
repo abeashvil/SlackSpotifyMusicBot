@@ -1,6 +1,6 @@
 # SlackSpotifyMusicBot
 
-#This bot sends a song from my recently listened to songs on spotify to the specified slack channel every hour over the course of a day, and then resends the winning song which has the most reactions by the end of the day.
+This bot sends a song from my recently listened to songs on spotify to the specified slack channel every hour over the course of a day, and then resends the winning song which has the most reactions by the end of the day.
 
 This bot was fully written in python, but will be rewritten in Javascript, or atleast for the Spotify API part of the project. 
 To Note: This project is very much still a work in progress, and I would like to have the bot working for all spotify accounts, and not just mine. 
@@ -11,7 +11,7 @@ To Note: This project is very much still a work in progress, and I would like to
       -Inefficient code, which can be fixed by having program run only at specified times, storing the results        in a database, and then checking the results after the day ends.
 
 How my code works: 
-  I have a few important method chunks which control most of whats going on. First I created a Message class 
+  -I have a few important method chunks which control most of whats going on. First I created a Message class 
   which stores the timestamp and text of a message. This is needed because the most efficient way of  retrieving 
   past slack messages is with the use of the timestamp from that message. I also needed the text of the message 
   for a later issue I will address. Next, I created a setup method which essentially creates a slack channel 
