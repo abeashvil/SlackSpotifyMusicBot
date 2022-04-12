@@ -1,5 +1,5 @@
-from calendar import c
-from logging.handlers import SYSLOG_UDP_PORT
+import threading
+import logging
 import spotipy
 import os
 import time
@@ -46,7 +46,7 @@ def send_new_song(channelid):
 
         todays_songs.add(Message(most_recent_song_link, ts))
 
-        
+        print(todays_songs)
 
 
     
@@ -70,17 +70,28 @@ def setup():
     return channelId
 
 def check_best_song(id):
-    curr = todays_songs.pop()
-    # for song in todays_songs:
-    #     if slack_client.reactions_get(channel= id, ts = song.getTimestamp()):
+    curr = 0
+    currSong = Message()
+    for song in todays_songs:
+        if slack_client.reactions_get(channel = id, timestamp = song.getTimestamp())['message']['reactions'][0]['count'] >= curr:
+            currSong = song
+    
+    return currSong
+
+def song_of_the_day():
+    id = setup()
+    i = 0
+    while True:
+        time.sleep(1000)
+        send_new_song(id)
+        i +=1
+
+        if(i >= 12):
+            check_best_song(id)
+            i = 0
 
 def main():
-    id = setup()
-
-    send_new_song(id)
-
-
-    print(slack_client.reactions_get(channel = channelid, timestamp = ts)['message']['reactions'][0]['count'])
+    
 
 
 
