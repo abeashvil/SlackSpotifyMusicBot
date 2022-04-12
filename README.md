@@ -4,6 +4,8 @@
 
 This bot was fully written in python, but will be rewritten in Javascript, or atleast for the Spotify API part of the project. 
 To Note: This project is very much still a work in progress, and I would like to have the bot working for all spotify accounts, and not just mine. 
+  
+  
   *Current Issues:
       - Spotipy API authentication does not support single login authentication, rahter requires the use of a           token. To fix this, the spotify section of the code must be written in the Javascript equivalent               library, which does support single login authentification.
       -Inefficient code, which can be fixed by having program run only at specified times, storing the results        in a database, and then checking the results after the day ends.
