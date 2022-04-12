@@ -98,7 +98,7 @@ sends the best song over an interval of 24 hours. users can vote on their favori
 
 @return void
 """ 
-def song_of_the_day():
+def song_of_the_day(id):
     id = setup()
     i = 0
     while True:
@@ -108,13 +108,15 @@ def song_of_the_day():
 
         if(i >= 4):
             song = check_best_song(id)
-            print("Todays best song is!")
-            print(song.getText())
+            slack_client.chat_postMessage(channel=id, text = 'Todays best song is:')
+            slack_client.chat_postMessage(channel=id, text = song.getText())
             i = 0
 
 
 def main():
-    song_of_the_day()
+    id = setup()
+
+    song_of_the_day(id)
 
 
 if __name__ == "__main__":
