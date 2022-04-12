@@ -86,7 +86,7 @@ setup for both the channel creation
 """ 
 def check_best_song(id):
     curr = 0
-    currSong = Message()
+    currSong = Message('filler', 'filler')
     for song in todays_songs:
         if slack_client.reactions_get(channel = id, timestamp = song.getTimestamp())['message']['reactions'][0]['count'] >= curr:
             currSong = song
@@ -102,11 +102,11 @@ def song_of_the_day():
     id = setup()
     i = 0
     while True:
-        time.sleep(1000)
+        time.sleep(10)
         send_new_song(id)
         i +=1
 
-        if(i >= 12):
+        if(i >= 4):
             song = check_best_song(id)
             print("Todays best song is!")
             print(song.getText())
